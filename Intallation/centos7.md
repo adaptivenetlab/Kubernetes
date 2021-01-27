@@ -144,6 +144,10 @@ yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce
 yum install -y docker-ce-19.03.12 
 systemctl enable --now docker
 ```
+check docker's status
+```bash
+systemctl status docker
+```
 ## Kubernetes Setup
 Add yum repository
 ```bash
@@ -172,11 +176,6 @@ kubeadm init --apiserver-advertise-address=$ipaddr --pod-network-cidr=192.168.0.
 ```
 change your $ipaddr with your master's ip address (192.168.56.200)
 
-## Deploy flannel network
-```bash
-kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
-```
-
 ## Cluster join command
 ```bash
 kubeadm token create --print-join-command
@@ -192,6 +191,10 @@ exit
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
+```
+## Deploy flannel network
+```bash
+kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
 ```
 
 # On Worker Node 1 and Worker Node 2
