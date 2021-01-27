@@ -81,7 +81,7 @@ sudo reboot
 
 hostname = worker2
 
-ip address = 192.168.56.201
+ip address = 192.168.56.202
 
 ```bash
 sudo su
