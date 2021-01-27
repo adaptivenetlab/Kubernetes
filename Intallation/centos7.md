@@ -46,7 +46,7 @@ sudo reboot
 
 1 vcpu
 
-hostname = master
+hostname = worker1
 
 ip address = 192.168.56.201
 
@@ -60,7 +60,7 @@ yum -y install nano
 ```bash
 nano /etc/hostname
 ```
-ubah adaptive menjadi worker2
+ubah adaptive menjadi worker1
 
 ## B. Konfigurasi IP Address
 ```bash
@@ -79,7 +79,7 @@ sudo reboot
 
 1 vcpu
 
-hostname = master
+hostname = worker2
 
 ip address = 192.168.56.201
 
@@ -99,7 +99,7 @@ ubah adaptive menjadi worker2
 ```bash
 nano /etc/sysconfig/network-scripts/ifcfg-enp0s3
 ```
-ubah menjadi IPADDR=192.168.56.201
+ubah menjadi IPADDR=192.168.56.202
 
 ## Restart VM
 
