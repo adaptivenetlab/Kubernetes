@@ -1,5 +1,5 @@
 # Install Kubernetes Cluster using kubeadm
-setup Kubernetes cluster on CentOS 7.
+setup Kubernetes Version 1.18.5 cluster on CentOS 7.
 
 # Create On Premist Kubernets Cluster with virtualbox
 1 master node
@@ -8,7 +8,7 @@ setup Kubernetes cluster on CentOS 7.
 
 Network VM di virtualbox menggunakan adapter Host Only dan NAT 
 # Konfigurasi environtment
-## Master Node 
+# Master Node 
 2 GB RAM
 
 2 vcpu
@@ -17,17 +17,32 @@ hostname = master
 
 ip address = 192.168.56.200
 
-## Worker1 Node 
-2 GB RAM
+```bash
+sudo su
+yum -y update 
+yum -y upgrade
+yum -y install nano 
+```
+## A. Konfigurasi Hostname
+```bash
+nano /etc/hostname
+```
+ubah adaptive menjadi master
 
-1 vcpu
+## B. Konfigurasi IP Address
+```bash
+nano /etc/sysconfig/network-scripts/ifcfg-enp0s3
+```
+ubah menjadi IPADDR=192.168.56.200
 
-hostname = master
+## Restart VM
 
-ip address = 192.168.56.201
+```bash
+sudo reboot 
+```
 
-## Worker1 Node 
-2 GB RAM
+# Worker Node 1 
+1 GB RAM
 
 1 vcpu
 
@@ -36,24 +51,73 @@ hostname = master
 ip address = 192.168.56.201
 
 ```bash
-sudo yum -y update
+sudo su
+yum -y update 
+yum -y upgrade
+yum -y install nano 
 ```
-## set ip on centos
+## A. Konfigurasi Hostname
 ```bash
-sudo vi /etc/sysconfig/network-scripts/ifcfg-enp0s3
+nano /etc/hostname
+```
+ubah adaptive menjadi worker2
+
+## B. Konfigurasi IP Address
+```bash
+nano /etc/sysconfig/network-scripts/ifcfg-enp0s3
+```
+ubah menjadi IPADDR=192.168.56.201
+
+## Restart VM
+
+```bash
+sudo reboot 
 ```
 
-change with your host ip
+# Worker Node 2 
+1 GB RAM
+
+1 vcpu
+
+hostname = master
+
+ip address = 192.168.56.201
+
+```bash
+sudo su
+yum -y update 
+yum -y upgrade
+yum -y install nano 
+```
+## A. Konfigurasi Hostname
+```bash
+nano /etc/hostname
+```
+ubah adaptive menjadi worker2
+
+## B. Konfigurasi IP Address
+```bash
+nano /etc/sysconfig/network-scripts/ifcfg-enp0s3
+```
+ubah menjadi IPADDR=192.168.56.201
+
+## Restart VM
+
+```bash
+sudo reboot 
+```
+
+# On Master Node
 
 ## add known host on master node
 ```bash
-sudo vi /etc/hosts
+nano /etc/hosts
 192.168.56.200 master
 192.168.56.201 worker1
 192.168.56.202 worker2
 ```
 
-# BOTH MASTER AND WORKER
+# Both Master and Worker Node
 ## Disable Firewall
 ```bash
 systemctl disable firewalld; systemctl stop firewalld
@@ -106,7 +170,7 @@ Initialize Kubernetes Cluster
 ```bash
 kubeadm init --apiserver-advertise-address=$ipaddr --pod-network-cidr=192.168.0.0/16
 ```
-change your $ipaddr with your master's ip address
+change your $ipaddr with your master's ip address (192.168.56.200)
 
 ## Deploy flannel network
 ```bash
@@ -117,19 +181,25 @@ kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documen
 ```bash
 kubeadm token create --print-join-command
 ```
+copy the token and paste to both worker, so the worker can join the cluster
+
+## Setting the cluster config
 To be able to run kubectl commands as non-root user, exit the root user
+```bash
+exit
+```
 ```bash
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
 
-# On worker node
-Join the cluster
+# On Worker Node 1 and Worker Node 2
+## Join the cluster
 
-Use the output from kubeadm token create command in previous step from the master server and run here.
+Use the output from kubeadm token create command in previous step from the master node and run here.
 
-## Verifying the cluster
+## Verifying the cluster (On Master Node)
 Get Nodes status
 ```bash
 kubectl get nodes
