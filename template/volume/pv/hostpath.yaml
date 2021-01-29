@@ -1,0 +1,11 @@
+piVersion: v1
+kind: PersistentVolume
+metadata:
+  name: persistent-volume-name
+spec:
+  accessModes:
+    - ReadWriteMany
+  capacity:
+    storage: 5Gi
+  hostPath:
+    path: /data/location
