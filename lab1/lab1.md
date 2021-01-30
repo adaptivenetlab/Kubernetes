@@ -76,7 +76,8 @@ echo "<h1>Hello client from kubernetes cluster using PVC :)</h1>" >> /data/index
 
 ## Testing
 ## open browser
-http://podX-master:[32000]
-
+```bash
+http://$IPworkernode:32000
+```
 
 Source: nolsatuid
