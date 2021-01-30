@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: nginx
+  name: nginx-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      volumes:
+      - name: webservercontent
+        persistentVolumeClaim:
+          claimName: nfs
+      containers:
+      - image: nginx
+        ports:
+        - containerPort: 80
+        name: nginx
+        volumeMounts:
+        - name: webservercontent
+          mountPath: /usr/share/nginx/html
