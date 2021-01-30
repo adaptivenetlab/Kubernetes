@@ -58,7 +58,9 @@ sudo apt install -y nfs-common
 ## Apply Deployment with PVC
 ```bash
 kubectl apply -f deployment.yaml
+kubectl get deploy
 ```
+## Expose Deployment dengan Service NodePort
 
 ```bash
 kubectl apply -f nodeport.yaml
