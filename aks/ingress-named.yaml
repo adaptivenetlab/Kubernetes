@@ -10,10 +10,12 @@ metadata:
 spec:
   tls:
   - hosts:
-    - nettraining.nathann.site
+    - ingress.nathann.site
+    - blue.nathann.site
+    - green.nathann.site
     secretName: tls-secret
   rules: #named based routing
-  - host: nettraining.nathann.site
+  - host: ingress.nathann.site
     http:
       paths:
       - backend:
