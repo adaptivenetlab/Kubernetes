@@ -1,0 +1,37 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: hello-world-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    cert-manager.io/cluster-issuer: letsencrypt
+spec:
+  tls:
+  - hosts:
+    - nettraining.nathann.site
+    secretName: tls-secret
+  rules: #named based routing
+  - host: nettraining.nathann.site
+    http:
+      paths:
+      - backend:
+          serviceName: nginx-service-main
+          servicePort: 80
+        path: /
+  - host: blue.nathann.site
+    http:
+      paths:
+      - backend:
+          serviceName: nginx-service-blue
+          servicePort: 80
+        path: /
+  - host: green.nathann.site
+    http:
+      paths:
+      - backend:
+          serviceName: nginx-service-green
+          servicePort: 80
+        path: /
+---
