@@ -14,10 +14,6 @@ spec:
       labels:
         app: nginx
     spec:
-      volumes:
-      - name: webservercontent
-        persistentVolumeClaim:
-          claimName: nfs
       containers:
       - image: nginx
         ports:
@@ -26,3 +22,7 @@ spec:
         volumeMounts:
         - name: webservercontent
           mountPath: /usr/share/nginx/html
+      volumes:
+      - name: webservercontent
+        persistentVolumeClaim:
+          claimName: nfs

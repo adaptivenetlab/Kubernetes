@@ -53,7 +53,7 @@ kubectl get pvc
 
 ## Instal paket nfs-common di semua node 
 ```bash
-sudo apt install -y nfs-common
+sudo yum install -y nfs-utils nfs-utils-lib
 ```
 ## Apply Deployment with PVC
 ```bash
