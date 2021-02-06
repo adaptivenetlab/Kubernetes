@@ -4,7 +4,7 @@ setup Kubernetes Version 1.18.5 cluster on CentOS 8.
 # Cluster
 1 master node
 
-2 worker node
+1 worker node
 
 ## On both master and worker
 ```bash
@@ -20,7 +20,7 @@ yum -y install nano
 ```bash
 nano /etc/hosts
 $masterip master
-$worker1ip worker1
+$worker1ip worker
 ```
 
 # Both Master and Worker Node
@@ -103,7 +103,7 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
 ```
 
-# On Worker Node 1 and Worker Node 2
+# On Worker Node
 ## Join the cluster
 
 Use the output from kubeadm token create command in previous step from the master node and run here.

@@ -5,21 +5,21 @@
 https://github.com/adaptivenetlab/kubernetes.git
 cd kubernetes-config/lab1
 ```
-## Di node worker1, buat direktori /data 
+## Di node worker, buat direktori /data 
 ```bash
 sudo mkdir /data
 ```
 
 ## Setting Manifest nfs-server
 ```bash
-vim nfs-server.yaml
+nano nfs-server.yaml
 ```
 ---
     spec:
       nodeSelector: 
         kubernetes.io/hostname: node0
 
-ganti node0 dengan nama host worker1 (dapat dicek dengan kubectl get nodes) masing-masing.
+ganti node0 dengan nama host worker (dapat dicek dengan kubectl get nodes) masing-masing.
 
 ## Di node master, jalankan file nfs-server.yaml
 ```bash
@@ -31,7 +31,7 @@ kubectl describe services nfs-server
 
 ## PV Provisioning. Edit IP server dengan ClusterIP nfs-server
 ```bash
-vim pv.yaml
+nano pv.yaml
 ```
 .....
   nfs:
@@ -67,8 +67,8 @@ kubectl apply -f nodeport.yaml
 kubectl get svc
 ```
 
-## tambahkan index.html di folder /data di worker1
-lakukan di vm worker1
+## tambahkan index.html di folder /data di worker
+lakukan di vm worker
 ```bash
 sudo su
 echo "<h1>Hello client from kubernetes cluster using PVC :)</h1>" >> /data/index.html
