@@ -115,4 +115,9 @@ kubectl get nodes
 ```
 congratulations!
 
+## Clone Adaptive's repository
+```bash
+sudo yum -y install git #install git
+git clone https://github.com/adaptivenetlab/kubernetes.git #clone repo
+```
 Source: just me and opensource
