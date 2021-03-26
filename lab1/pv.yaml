@@ -5,10 +5,10 @@ metadata:
   name: nfs
 spec:
   capacity:
-    storage: 1Mi
+    storage: 1Gi
   accessModes:
     - ReadWriteMany
   nfs:
     # FIXME: use the right IP
-    server: 10.103.64.119 #nfs' cluster IP
+    server: x.x.x.x #nfs' cluster IP
     path: "/exports"
