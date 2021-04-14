@@ -219,7 +219,7 @@ apt update && apt install -y kubeadm kubelet kubectl
 Update the $ipaddr with the ip address of master
 
 ```bash
-kubeadm init --apiserver-advertise-address=$ipaddr --pod-network-cidr=192.168.0.0/16
+kubeadm init --apiserver-advertise-address=$ipaddr --pod-network-cidr=10.20.0.0/16
 ```
 
 ## Deploy flannel network
