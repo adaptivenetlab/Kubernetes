@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: hello-world-ingress
+spec:
+  rules: #named based routing
+  - host: ingress.nathan.local
+    http:
+      paths:
+      - backend:
+          serviceName: nginx-service-main
+          servicePort: 80
+        path: /
+  - host: blue.nathan.local
+    http:
+      paths:
+      - backend:
+          serviceName: nginx-service-blue
+          servicePort: 80
+        path: /
+  - host: green.nathan.local
+    http:
+      paths:
+      - backend:
+          serviceName: nginx-service-green
+          servicePort: 80
+        path: /
+---
