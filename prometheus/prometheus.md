@@ -32,4 +32,4 @@ note external ip and try to access from browser
 ```
 
 # Set Up Grafana
-I suggest to install grafana on your local workspace, so you just only import prometheus data source <external-ip>:9090 to grafana monitoring dashboard
+I suggest to install grafana on your local workspace, so you just only import prometheus data source $external-ip:9090 to grafana monitoring dashboard
