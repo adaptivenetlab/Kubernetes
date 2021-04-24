@@ -78,9 +78,10 @@ systemctl enable --now kubelet
 # On Master node
 Initialize Kubernetes Cluster
 ```bash
-kubeadm init --apiserver-advertise-address=$ipaddr --pod-network-cidr=192.168.0.0/16
+kubeadm init --apiserver-advertise-address=$ipaddr --pod-network-cidr=10.20.0.0/16
 ```
-change your $ipaddr with your master's ip address 
+- change your $ipaddr with your master's ip address 
+- --pod-network-cidr is optionally, in this case I use 10.20.0.0/16 as pod subnet
 
 ## Cluster join command
 ```bash

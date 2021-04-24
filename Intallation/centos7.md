@@ -165,7 +165,9 @@ EOF
 ## Install Kubernetes components
 ```bash
 yum install -y kubeadm-1.18.5-0 kubelet-1.18.5-0 kubectl-1.18.5-0
-Enable and Start kubelet service
+```
+## Enable and Start kubelet service
+```bash
 systemctl enable --now kubelet
 ```
 
@@ -174,7 +176,8 @@ Initialize Kubernetes Cluster
 ```bash
 kubeadm init --apiserver-advertise-address=$ipaddr --pod-network-cidr=10.20.0.0/16
 ```
-change your $ipaddr with your master's ip address (192.168.56.200)
+- change your $ipaddr with your master's ip address (192.168.56.200)
+- --pod-network-cidr is optionally, in this case I use 10.20.0.0/16 as pod subnet
 
 ## Cluster join command
 ```bash
