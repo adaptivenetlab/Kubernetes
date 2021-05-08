@@ -1,0 +1,34 @@
+sudo docker run --rm -i -e PGPASSWORD=${SECURITY_ADMIN_PASSWORD} postgres:9.6 \
+    psql -U ${SECURITY_ADMIN_USER} "postgres://${REMOTE_DB_HOST}/postgres" \
+    << EOSQL
+
+CREATE DATABASE ${APPLICATION_DB_NAME};
+
+/* connect to it */
+
+\c ${APPLICATION_DB_NAME};
+
+CREATE TABLE pets (
+  id serial primary key,
+  name varchar(256)
+);
+
+/* Create Application User */
+
+CREATE USER ${APPLICATION_DB_USER} PASSWORD '${APPLICATION_DB_INITIAL_PASSWORD}';
+
+/* Grant Permissions */
+
+GRANT SELECT, INSERT ON public.pets TO ${APPLICATION_DB_USER};
+GRANT USAGE, SELECT ON SEQUENCE public.pets_id_seq TO ${APPLICATION_DB_USER};
+EOSQL
+
+
+
+
+
+kubectl --namespace quick-start-application-ns \
+  create secret generic quick-start-backend-credentials \
+  --from-literal=host="${REMOTE_DB_HOST}" \
+  --from-literal=username="${APPLICATION_DB_USER}" \
+  --from-literal=password="${APPLICATION_DB_INITIAL_PASSWORD}"
