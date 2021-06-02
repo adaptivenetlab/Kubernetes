@@ -9,5 +9,5 @@ data:
     - name: default
       protocol: layer2
       addresses:
-      - 192.168.0.100-192.168.0.120 #useable ip on your subnet
-      # ex : 192.168.0.0/24 Usable range 192.168.0.1 - 192.168.0.254
+      - 192.168.0.100-192.168.0.120
+      # usable ip on your local network, ex : 192.168.0.0/24 Usable range 192.168.0.1 - 192.168.0.254

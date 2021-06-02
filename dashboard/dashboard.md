@@ -11,7 +11,7 @@ kubectl get all -n kubernetes-dashboard
 we will access the dashboard with loadbalancer service
 
 ```bash
-kubectl edit service/kubernetes-dashboard
+kubectl edit service/kubernetes-dashboard -n kubernetes-dahboard
 ```
 change the type from ClusterIP to LoadBalancer
 
